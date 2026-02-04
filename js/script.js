@@ -4,19 +4,50 @@ document.addEventListener('DOMContentLoaded', () => {
     const grid = document.getElementById('productGrid');
     const search = document.getElementById('searchInput');
     if (grid && search) {
+        // Mảng sản phẩm chi tiết thêm thuộc tính image, category, desc
         const products = [
-            { name: "iPhone 15 Pro", price: "28.000.000đ" },
-            { name: "Samsung Galaxy S24", price: "22.500.000đ" },
-            { name: "Macbook Pro M3", price: "40.000.000đ" },
-            { name: "iPad Air 5", price: "14.500.000đ" },
-            { name: "AirPods Pro 2", price: "5.500.000đ" }
-        ];
+    { 
+        id: 1, name: "iPhone 17 Pro Max", price: "36.990.000đ", 
+        image: "images/iPhone 17 Pro Max.webp", 
+        category: "Điện thoại", desc: "Chip A19 Pro (2nm), RAM 12GB, màn hình ProMotion 144Hz."
+    },
+    { 
+        id: 2, name: "iPad Pro M5 (2026)", price: "32.490.000đ", 
+        image: "images/iPad Pro M5 (2026).webp", 
+        category: "Máy tính bảng", desc: "Chip M5 siêu phân luồng, thiết kế không viền hoàn toàn."
+    },
+    { 
+        id: 3, name: "Samsung Galaxy S25 Ultra", price: "33.990.000đ", 
+        image: "images/Samsung Galaxy S25 Ultra.webp", 
+        category: "Điện thoại", desc: "Camera 300MP, pin Graphene sạc siêu nhanh 15 phút."
+    },
+    { 
+        id: 4, name: "Macbook Pro M5 Max", price: "55.990.000đ", 
+        image: "images/iPad Pro M5 (2026).webp", 
+        category: "Laptop", desc: "Cấu trúc Neural Engine thế hệ 6, xử lý AI cục bộ cực mạnh."
+    },
+    { 
+        id: 5, name: "Apple Vision Pro 2", price: "85.000.000đ", 
+        image: "images/Apple Vision Pro 2.jpg", 
+        category: "Kính VR", desc: "Trọng lượng siêu nhẹ, độ phân giải 8K mỗi mắt."
+    },
+    { 
+        id: 6, name: "AirPods Pro 3", price: "6.990.000đ", 
+        image: "images/AirPods Pro 3.webp", 
+        category: "Phụ kiện", desc: "Cảm biến đo nhịp tim và nhiệt độ cơ thể qua tai."
+    }
+];
 
+        // Hàm hiển thị sản phẩm với giao diện chi tiết
         const display = (list) => {
             grid.innerHTML = list.map(p => `
                 <div class="card">
+                    <span class="badge">${p.category}</span>
+                    <img src="${p.image}" alt="${p.name}" class="product-img">
                     <h3>${p.name}</h3>
-                    <p style="color: #e67e22; font-weight: bold;">${p.price}</p>
+                    <p class="desc">${p.desc}</p>
+                    <p class="price">${p.price}</p>
+                    <button class="buy-btn">Mua ngay</button>
                 </div>
             `).join('');
             document.getElementById('errorMsg').style.display = list.length ? 'none' : 'block';
@@ -28,9 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
             display(filtered);
         });
 
-        display(products); // Khởi tạo ban đầu
+        display(products); // Gọi lần đầu để hiện danh sách
     }
-
     // --- PHẦN 2: BÀI TẬP 02 - VALIDATE & LOCAL STORAGE ---
     const regForm = document.getElementById('regForm');
     if (regForm) {
